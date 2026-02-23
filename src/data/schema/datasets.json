@@ -1,0 +1,81 @@
+{
+  "$comment": "Schema for a list of argument mining datasets, unique by dataset_id and name",
+  "type": "object",
+  "properties": {
+    "datasets": {
+      "$comment": "List of datasets",
+      "type": "array",
+      "uniqueItems": true,
+      "uniqueItemProperties": [
+        "dataset_id",
+        "dataset_name"
+      ],
+      "items": {
+        "type": "object",
+        "properties": {
+          "dataset_id": {
+            "$comment": "Unique id, should be human readable",
+            "type": "string"
+          },
+          "dataset_name": {
+            "$comment": "Name of dataset",
+            "type": "string"
+          },
+          "genre": {
+            "$comment": "genre of dataset, e.g., 'legal', 'social media', 'scientific', 'general'",
+            "type": "string"
+          },
+          "description": {
+            "$comment": "Short description of dataset",
+            "type": "array",
+            "items": {
+              "$comment": "Paragraph of description. If you start a string with NOTE it will be highlighted in the display.",
+              "type": "string"
+            }
+          },
+          "language": {
+            "$comment": "Language(s) of dataset, e.g., 'English', 'Chinese'",
+            "type": "array",
+            "items": {
+              "$comment": "Language of dataset",
+              "type": "string"
+            }
+          },
+          "document_type": {
+            "$comment": "Type of documents in dataset, e.g., 'essays', 'tweets', 'legal cases'",
+            "type": "string"
+          },
+          "document_count": {
+            "$comment": "Size of dataset in number of documents",
+            "type": "integer"
+          },
+          "extends": {
+            "$comment": "List of parent datasets ids if this dataset is derived from other datasets",
+            "type": "array",
+            "items": {
+              "$comment": "Unique id of parent dataset",
+              "type": "string"
+            },
+            "minItems": 0,
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "dataset_id",
+          "dataset_name",
+          "genre",
+          "description",
+          "language",
+          "document_type",
+          "document_count",
+          "extends"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "datasets"
+  ],
+  "additionalProperties": false
+}
